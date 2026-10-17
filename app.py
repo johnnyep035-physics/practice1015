@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template
 
 # 建立 Flask 應用程式實例
@@ -15,5 +16,7 @@ def home():
     )
 
 if __name__ == '__main__':
-    # debug=True 可在開發時開啟除錯模式，程式碼更新後會自動重載
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    # 支援雲端平台 (如 Render) 動態指定的 PORT，本機預設 5000
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
+
